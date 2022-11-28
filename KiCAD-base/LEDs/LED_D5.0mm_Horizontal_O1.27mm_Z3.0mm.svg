@@ -9,7 +9,6 @@
    sodipodi:docname="LED_D5.0mm_Horizontal_O1.27mm_Z3.0mm.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -17,18 +16,6 @@
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs5569">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient35298">
-      <stop
-         style="stop-color:#0a8500;stop-opacity:1;"
-         offset="0"
-         id="stop35296" />
-      <stop
-         style="stop-color:#adf955;stop-opacity:1;"
-         offset="1"
-         id="stop35294" />
-    </linearGradient>
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath6129">
@@ -40,15 +27,6 @@
          x="-2.8443117"
          y="1049.6301" />
     </clipPath>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient35298"
-       id="linearGradient35300"
-       x1="-0.50000012"
-       y1="1053.2622"
-       x2="-0.50000012"
-       y2="1057.4622"
-       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -57,9 +35,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="90.509668"
-     inkscape:cx="6.7672329"
-     inkscape:cy="6.9882037"
+     inkscape:zoom="22.627417"
+     inkscape:cx="-1.8782524"
+     inkscape:cy="11.777747"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -138,7 +116,7 @@
        id="rect51130-3"
        style="opacity:1;fill:#d6dcdb;fill-opacity:1;fill-rule:nonzero;stroke:#99abb0;stroke-width:0.0534242;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <path
-       style="fill:url(#linearGradient35300);fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.46177846;stroke-dasharray:none"
+       style="fill:#7dd139;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.46177846;stroke-dasharray:none"
        d="m -2.7,1052.0622 v 6.2 c -10e-8,3.3 4.9999998,3.3 4.9999997,0 v -5 h 0.4 v -1.2 z"
        id="path730"
        sodipodi:nodetypes="ccccccc" />
