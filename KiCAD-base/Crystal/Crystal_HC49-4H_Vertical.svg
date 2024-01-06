@@ -4,9 +4,9 @@
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
    version="1.1"
    id="svg2"
-   width="1.0999955mm"
-   height="1.1000315mm"
-   viewBox="0 0 1.0999955 1.1000315"
+   width="11.35mm"
+   height="5.000001mm"
+   viewBox="0 0 11.35 5.000001"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -49,24 +49,32 @@
      pagecolor="#d3d3d3"
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
-     inkscape:snap-smooth-nodes="true">
+     inkscape:snap-smooth-nodes="true"
+     inkscape:showpageshadow="0"
+     inkscape:deskcolor="#d1d1d1">
     <inkscape:grid
        type="xygrid"
        id="grid822"
        units="mm"
        spacingx="0.050000001"
-       spacingy="0.050000001" />
+       spacingy="0.050000001"
+       originx="3.2349998"
+       originy="2.5000003"
+       visible="true" />
     <inkscape:grid
        type="xygrid"
        id="grid2771"
        units="mm"
        spacingx="0.025"
        spacingy="0.025"
-       enabled="false" />
+       enabled="false"
+       originx="3.2349998"
+       originy="2.5000003"
+       visible="true" />
   </sodipodi:namedview>
   <path
      style="fill:#b3b3b3;fill-opacity:1;stroke:#666666;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-     d="m -0.735,-2.35 c 0,0 -2.35,0 -2.35,2.34999995000079 C -3.085,2.3500001 -0.735,2.3500001 -0.735,2.3500001 h 6.35 c 0,0 2.35,0 2.35,-2.35000014999921 C 7.965,-2.3500001 5.615,-2.35 5.615,-2.35 Z"
+     d="m 2.5,0.15000035 c 0,0 -2.34999999,0 -2.34999999,2.34999995 C 0.15000001,4.8500005 2.5,4.8500005 2.5,4.8500005 h 6.35 c 0,0 2.35,0 2.35,-2.3500002 0,-2.35000005 -2.35,-2.34999995 -2.35,-2.34999995 z"
      id="path1052"
      sodipodi:nodetypes="csccscc" />
   <rect
@@ -74,6 +82,6 @@
      id="origin"
      width="1"
      height="1"
-     x="-1.3877788e-17"
-     y="0" />
+     x="3.2349999"
+     y="2.5000002" />
 </svg>
