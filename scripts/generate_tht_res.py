@@ -10,6 +10,7 @@ scaled from this size to the desired size.
 
 from lxml import etree
 from copy import deepcopy
+import re
 import os
 
 res_options = [
@@ -30,7 +31,7 @@ def map_scale(old_scale, new_scale):
     return new_scale / old_scale
 
 def map_stroke_value(s_v, old_scale, new_scale):
-    return s_v / new_scale * old_scale
+    return s_v * (new_scale / old_scale)
 
 if __name__ == "__main__":
     if not os.path.isdir("export"):
@@ -39,7 +40,22 @@ if __name__ == "__main__":
     # generate all the horizonal resistors
     for r in res_options:
         for pin_len in r['ps_h']:
+            # if r['l'] > 6.0:
+                # document = etree.parse("base/R_Axial_Horizonal_Long_BASE.svg")
+                # orig_ysize = 1.834
+            # else:
             document = etree.parse("base/R_Axial_Horizonal_BASE.svg")
+            orig_ysize = 2.075
+
+            def mapX(oldX):
+                v = oldX*(r['l']/6.0)
+                return f"{v:.3f}"
+            def mapY(oldY):
+                v = oldY*(r['d']/orig_ysize)
+                return f"{v:.3f}"
+            def mapXY(oldX, oldY):
+                return mapX(oldX) + ',' + mapY(oldY)
+
             root = document.getroot()
             
             # Delete all inkscape grids
@@ -57,10 +73,49 @@ if __name__ == "__main__":
             
             # Find the main body, then transform it
             bean = root.find(".//*[@id='res_bean']")
-            bean.attrib["transform"] = "translate({}, 0) scale({}, {})".format((pin_len/2)-(r['l']/2), map_scale(6.0, r['l']), map_scale(2.075, r['d']))
+            bean.attrib["transform"] = "translate({}, 0)".format((pin_len/2)-(r['l']/2))
+
+            # set new bean path, to scale it nicely including stroke
+            # from design file:
+            #       "M 0,0 C 0,1 0.9,1.3 1.5,0.8 H 3 4.5 C 5.1,1.3 6,1 6,0 6,-1 5.1,-1.3 4.5,-0.8 H 3 1.5 C 0.9,-1.3 0,-1 0,0 Z"
+            curveDamp = 0.0
+            if r['l'] > 6.0:
+                curveDamp = ((r['l']-6.0)/20.0) * -0.5
+
+            def dampenCurve(cStartX, cStartY, cLocX, cLocY):
+                deltaX = cLocX - cStartX
+                deltaY = cLocY - cStartY
+                deltaX *= curveDamp
+                deltaY *= curveDamp
+                return mapXY(cLocX+deltaX, cLocY+deltaY)
+
+
+            beanPath = f"M 0,0 \
+                C {mapXY(0.0,1.0)} {dampenCurve(1.5,0.8, 0.9,1.3)} {mapXY(1.5,0.8)} \
+                H {mapX(3.0)} {mapX(4.5)} \
+                C {dampenCurve(4.5, 0.8, 5.1,1.3)} {mapXY(6,1)} {mapXY(6,0)} \
+                  {mapXY(6,-1)} {dampenCurve(4.5, -0.8, 5.1,-1.3)} {mapXY(4.5,-0.8)} \
+                H {mapX(3.0)} {mapX(1.5)} \
+                C {dampenCurve(1.5,-0.8, 0.9,-1.3)} {mapXY(0,-1)} 0,0\
+                Z"
+
+            bean_fill = root.find(".//*[@id='bean_fill']")
+            bean_fill.attrib["d"] = beanPath
             
             bean_outline = root.find(".//*[@id='bean_outline']")
-            bean_outline.attrib["style"] = bean_outline.attrib["style"].replace("0.0900001", str(map_stroke_value(0.0900001, 6.0, r['l'])))
+            bean_outline.attrib["style"] = re.sub(r'stroke-width:\d*\.?\d+', f'stroke-width:{map_stroke_value(0.09, 6.0, r['l']):.4f}', bean_outline.attrib["style"])
+            bean_outline.attrib["d"] = beanPath
+
+            # for each resistor band, also move the rectangle size
+            resBands = [f"res_band{i+1}" for i in range(4)]
+            resBands += [f"res_5band{i+1}" for i in range(5)]
+            resBands += ['res_zeroband']
+            for bandI in resBands:
+                band = root.find(f".//*[@id='{bandI}']")
+                for key in ['x', 'width']:
+                    band.attrib[key] = mapX(float(band.attrib[key]))
+                for key in ['y','height']:
+                    band.attrib[key] = mapY(float(band.attrib[key]))
             
             # Add the origin back
             root.append(origin)
@@ -92,7 +147,7 @@ if __name__ == "__main__":
             bean.attrib["transform"] = "scale({a}, {a})".format(a=map_scale(0.9*2, r['d']))
 
             bean_outline = root.find(".//*[@id='bean_outline']")
-            bean_outline.attrib["style"] = bean_outline.attrib["style"].replace("0.0900001", str(map_stroke_value(0.0900001, 0.9*2, r['d'])))
+            # bean_outline.attrib["style"] = re.sub(r'stroke-width:\d*\.?\d+', f'stroke-width:{map_stroke_value(0.09, 0.9*2, r['d']):.4f}', bean_outline.attrib["style"])
 
             # Add the origin back
             root.append(origin)
